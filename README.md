@@ -206,3 +206,21 @@ That's all! Now, any changes to your `Dockerfile`, `fly.toml` or
 [Fly.io]: https://fly.io
 [websockets]: https://github.com/dani-garcia/vaultwarden/wiki/Enabling-WebSocket-notifications
 [fly.toml]: fly.toml
+
+## SEPER FAQ
+
+```sh
+cat .config.env | fly secrets import -a vwapp
+```
+
+```sh
+task github:workflow:deploy
+```
+
+```sh
+task fly:app:ssh
+```
+
+```sh
+restic init
+```

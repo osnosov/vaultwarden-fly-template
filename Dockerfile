@@ -8,7 +8,7 @@ ARG OVERMIND_VERSION=v2.4.0
 ARG SUPERCRONIC=supercronic-linux-amd64
 ARG OVERMIND=overmind-${OVERMIND_VERSION}-linux-amd64
 
-FROM vaultwarden/server:1.30.0-alpine as vaultwarden
+FROM vaultwarden/server:1.30.1-alpine as vaultwarden
 
 #
 # Supercronic
@@ -69,7 +69,8 @@ RUN apk add --no-cache \
   sqlite \
   restic \
   msmtp \
-  mailx
+  mailx \
+  bash
 
 VOLUME /data
 

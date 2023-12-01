@@ -7,16 +7,21 @@ includes:
 tasks:
   create:
     cmds:
-      - |
-        fly_app=$(fly apps create --generate-name 2>&1 | tee /dev/tty)
-        echo $fly_app | awk -F 'New app created:\ ' '{print "\n# Fly app name\nFLY_APP="$2}' >> .config.env
+      # Не работает на виндовс. Сами придуміваем и записываем в .config.env FLY_APP переменную
+      - fly apps create {{.FLY_APP}}
+    #      - |
+    #        fly_app=$(fly apps create --generate-name 2>&1 | tee /dev/tty)
+    #        echo $fly_app | awk -F 'New app created:\ ' '{print "\n# Fly app name\nFLY_APP="$2}' >> .config.env
     silent: true
   destroy:
     cmds:
       - fly apps destroy {{.FLY_APP}}
   deploy:
     cmds:
-      - task: :secrets:set
+      # Не рабо на виндовс. По всей видимости не может достать переменную FLY_APP
+      # перед деплоем суками набираем:
+      # cat .config.env | fly secrets import -a тут-имя-приложения
+      #      - task: :secrets:set
       - fly deploy -a {{.FLY_APP}}
   ssh:
     cmds:

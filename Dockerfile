@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=aptible/supercronic
-ARG SUPERCRONIC_VERSION=v0.2.27
+ARG SUPERCRONIC_VERSION=v0.2.29
 
 # renovate: datasource=github-releases depName=DarthSim/overmind
 ARG OVERMIND_VERSION=v2.4.0
@@ -8,12 +8,12 @@ ARG OVERMIND_VERSION=v2.4.0
 ARG SUPERCRONIC=supercronic-linux-amd64
 ARG OVERMIND=overmind-${OVERMIND_VERSION}-linux-amd64
 
-FROM vaultwarden/server:1.30.1-alpine as vaultwarden
+FROM vaultwarden/server:1.30.5-alpine as vaultwarden
 
 #
 # Supercronic
 #
-FROM alpine:3.18 as supercronic
+FROM alpine:3.19 as supercronic
 
 ARG SUPERCRONIC_VERSION
 ARG OVERMIND_VERSION
@@ -29,7 +29,7 @@ RUN wget "$SUPERCRONIC_URL" && chmod +x "$SUPERCRONIC"
 #
 # Overmind
 #
-FROM alpine:3.18 as overmind
+FROM alpine:3.19 as overmind
 
 ARG OVERMIND_VERSION
 ARG SUPERCRONIC
@@ -46,7 +46,7 @@ RUN wget "$OVERMIND_URL" && gunzip ${OVERMIND_FILE} && chmod +x "$OVERMIND"
 #
 # Fly app
 #
-FROM caddy:2.7.5-alpine
+FROM caddy:2.7.6-alpine
 
 ARG SUPERCRONIC
 ARG OVERMIND
